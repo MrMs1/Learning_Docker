@@ -34,7 +34,7 @@ Serviceは1つのアプリケーションイメージしか扱えないため、
 overlayネットワークは、複数のDockerホストにデプロイされているコンテナ群を同じネットワークに配置させる技術。  
 StackによりデプロイされるService群は、overlayネットワークに所属する。  
 Stackで利用するoverlayネットワークを設定しなければ、Stackの数だけoverlayネットワークが作成され、その中にService群が所属する。  
-他のoverlayネットワークに所属するServiceから別のoverlayネットワークをディスカバリ、通信することはできない。  
+**他のoverlayネットワークに所属するServiceから別のoverlayネットワークをディスカバリ、通信することはできない。**  
 あらかじめoverlayネットワークを作成しておき、Stackから作成されるServiceを所属させるようにすることで対応する。  
 overlayネットワークの作成は managerコンテナ内で以下のコマンドを実行して行う。  
 

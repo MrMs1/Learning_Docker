@@ -3,12 +3,12 @@ services:
   nginx:
     image: gihyodocker/nginx-proxy:latest
     deploy:
-      replicas: 3
+      replicas: 3 # レプリカ数の指定
       placement:
-        constraints: [node.role != manager]
+        constraints: [node.role != manager] # 制約で配置するノードを指定
     environment:
-      SERVICE_PORTS: 80
-      BACKEND_HOST: echo_api:8080
+      SERVICE_PORTS: 80 # HAProxyがServiceを見つけるためのポート
+      BACKEND_HOST: echo_api:8080 # リクエストの転送先の設定
     depends_on:
       - api
     networks:

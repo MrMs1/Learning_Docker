@@ -1,6 +1,6 @@
 # Docker Swarm 構築手順
 
-## 1. Swarmクラスタを構成する docker-compose.yml の作成
+## 1. Swarmクラスタを構成する [docker-compose.yml](./docker-compose.yml) の作成
 
 ## 2. コンテナ群の起動
 
@@ -64,5 +64,17 @@ docker container exec -it manager docker stack ps [Stack名]
 Docker Hub のdockersamples/visualizerのイメージを使用することで配置されているコンテナの可視化が可能（ブラウザで閲覧できる）。
 [ymlファイル](./stack/visualizer.yml)
 
+## 7. プロキシサーバーの設置
+
+Serviceが複数のコンテナが複数のノードに分散して配置されているため、Serviceクラスタ外（ホスト側）からアクセスするのが困難である。  
+そのため、Serviceクラスタ外からのトラフィックを目的のServiceへ転送するプロキシサーバーを設置する。  
+dockercloud/haproxyを使用する。  
+[nginxのyml](./stack/ch03-webapi.yml)にSERVICE_PORTSを追加し、ポートフォワーディングするポートを指定する。  
+指定する値は[Swarm](docker-compose.yml)の公開しているポートである80。  
+nginxのStackを再デプロイ後、[プロキシサーバーのStack](./stack/ch03-ingress.yml)もデプロイする。
+
 ---
-[Docker Swarm 概要](README.md)  
+[Docker Swarm へ戻る](README.md)  
+
+---
+[TOPへ戻る](../README.md)  

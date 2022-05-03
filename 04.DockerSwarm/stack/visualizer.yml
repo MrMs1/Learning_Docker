@@ -7,6 +7,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
-      mode: global
+      mode: global # Swarmクラスタ上の全ノードに配置する設定
       placement:
-        constraints: [node.role == manager]
+        constraints: [node.role == manager] # 制約によりmanagerノードにのみ配置する
