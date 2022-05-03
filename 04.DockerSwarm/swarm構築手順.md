@@ -62,7 +62,7 @@ docker container exec -it manager docker stack ps [Stack名]
 ```
 
 Docker Hub のdockersamples/visualizerのイメージを使用することで配置されているコンテナの可視化が可能（ブラウザで閲覧できる）。
-[ymlファイル](./stack/visualizer.yml)
+[visualizerのStack](./stack/visualizer.yml)をデプロイしてServiceへアクセスすることでイメージでコンテナの配置を確認できる。
 
 ## 7. プロキシサーバーの設置
 
