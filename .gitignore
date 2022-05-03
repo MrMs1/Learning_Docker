@@ -3,3 +3,6 @@ jenkins_home/
 
 # swarm
 registry-data/
+
+# app on swarm
+tododb/
