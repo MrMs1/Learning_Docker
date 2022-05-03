@@ -20,7 +20,8 @@ services:
       - registry
     expose:
       - 3375
-    command: "--insecure-registry registry:5000"
+    command: "--insecure-registry registry:5000" # DockerレジストリへのアクセスはHTTPSが前提となっている。
+                                                 # コンテナ同士はHTTPでアクセスするため、registoryへのアクセスをHTTPで行えるようにしている。
     volumes:
       - "./stack:/stack"
 
