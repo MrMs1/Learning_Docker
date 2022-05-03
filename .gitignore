@@ -6,3 +6,5 @@ registry-data/
 
 # app on swarm
 tododb/
+todoapi/
+todonginx/
