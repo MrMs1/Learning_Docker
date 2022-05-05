@@ -10,10 +10,12 @@ Kubernetesを操作するためのコマンドラインツール。
 
 ## Dashboard
 
-Kubernetesにデプロイされているコンテナを確認するWebベースの管理ツール。
+Kubernetesにデプロイされているコンテナを確認するWebベースの管理ツール。  
 [利用方法](https://kubernetes.io/ja/docs/tasks/access-application-cluster/web-ui-dashboard/#%E3%83%80%E3%83%83%E3%82%B7%E3%83%A5%E3%83%9C%E3%83%BC%E3%83%89ui%E3%81%AE%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4)
 
 ## 主なリソース
+
+[Kubernetesクラスタ構成図](Kubernetesクラスタの構成.drawio.svg)  
 
 |  リソース名  |  用途  |
 | ---- | ---- |
@@ -57,6 +59,8 @@ Kubernetesのリソース作成・更新・削除はKubernetesクラスタにデ
 このAPIは複数のAPI群を束ねるように構成されており、apiVersionはリソースの操作に利用するAPIの種別を示している。  
 
 ## [Role-Based Access Control(RBAC)](09.Role-Based%20Access%20Control(RBAC)/README.md)
+
+## [Helm](10.Helm/README.md)
 
 ---
 [TOPへ戻る](../README.md)
