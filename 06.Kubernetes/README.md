@@ -14,6 +14,7 @@ Kubernetesにデプロイされているコンテナを確認するWebベース�
 [利用方法](https://kubernetes.io/ja/docs/tasks/access-application-cluster/web-ui-dashboard/#%E3%83%80%E3%83%83%E3%82%B7%E3%83%A5%E3%83%9C%E3%83%BC%E3%83%89ui%E3%81%AE%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4)
 
 ## 主なリソース
+
 |  リソース名  |  用途  |
 | ---- | ---- |
 |  [Node](https://kubernetes.io/ja/docs/concepts/architecture/nodes/)  |  Kubernetesクラスタで実行するコンテナを配置するためのサーバ  |
@@ -41,5 +42,21 @@ Kubernetesにデプロイされているコンテナを確認するWebベース�
 
 [kubectlチートシート](https://kubernetes.io/ja/docs/reference/kubectl/cheatsheet/)
 
+## freshpod
+
+Kubernetes上でデプロイされているコンテナイメージの更新を検知し、自動再デプロイを行う。  
+containersのimagePullPolocyをIfNotPresetにする必要がある。  
+
+## kube-prompt
+
+macOS/Linux向けの補完ツール。  
+
+## Kubernetes API
+
+Kubernetesのリソース作成・更新・削除はKubernetesクラスタにデプロイされているAPIによって行われる。  
+このAPIは複数のAPI群を束ねるように構成されており、apiVersionはリソースの操作に利用するAPIの種別を示している。  
+
+## [Role-Based Access Control(RBAC)](09.Role-Based%20Access%20Control(RBAC)/README.md)
+
 ---
-[TOPへ戻る](../README.md) 
+[TOPへ戻る](../README.md)

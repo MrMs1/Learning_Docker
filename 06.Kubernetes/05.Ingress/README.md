@@ -1,0 +1,6 @@
+# Ingress
+
+Kubernetesクラスタの外部公開とVirtualHostやパスベースでの高度なHTTPルーティングを提供する。  
+ServiceのNodePort ServiceではL4層レベルまでの制御になるが、Ingressを用いるとL7層レベルの制御ができる。  
+ローカルKubernetes環境ではIngressを使用したServiceの公開は出来ない。  
+パブリッククラウドではそのプラットフォームのL7ロードバランサーを利用できる。  
