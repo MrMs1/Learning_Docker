@@ -60,7 +60,7 @@ Kubernetesのリソース作成・更新・削除はKubernetesクラスタにデ
 
 ## [Role-Based Access Control(RBAC)](09.Role-Based%20Access%20Control(RBAC)/README.md)
 
-## [Helm](10.Helm/README.md)
+## [Helm](13.Helm/README.md)
 
 ---
 [TOPへ戻る](../README.md)
