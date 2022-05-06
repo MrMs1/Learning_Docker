@@ -1,1 +1,10 @@
 # StatefulSet
+
+データストアのような継続的にデータを永続化するステートフルなアプリケーションの管理に向いたリソース。  
+Deploymentは一意性を持つPodや永続化データを持つ必要のないステートレスなアプリケーションのデプロイに向いている。  
+Deploymentはランダムに識別子が付与されるのに対して、StatefulSetは連番の一意な識別子でPodを作成する。  
+Podが再作成された際も識別子は維持され、スケーリングの際も連番が維持されるように行われる。  
+Podが安定した識別子を持つことによって、Podの再作成されてもストレージを継続して同じPodに紐づけることができ、Podが持つデータを再作成前と同じ状態で復元できる。  
+StatefulSetはステートフルなReplicaSetという位置づけのため、Podのレプリカ数やコンテナや環境変数定義はReplicaSetの定義と変わらない。  
+ReplicaSetとはvolumeClaimTemplatesが設定できるところで異なる。  
+volumeClaimTemplatesはPodごとにPersistentVolumeClaim自動生成するためのテンプレート。  
