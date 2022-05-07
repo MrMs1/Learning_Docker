@@ -5,7 +5,7 @@ jenkins_home/
 registry-data/
 
 # app on swarm
-tododb/
-todoapi/
-todonginx/
-todoweb/
+05.App on Swarm/tododb/
+05.App on Swarm/todoapi/
+05.App on Swarm/todonginx/
+05.App on Swarm/todoweb/
