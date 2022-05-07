@@ -12,6 +12,7 @@ Pod間の通信を可能にする。
 
 Kubernetesクラスタ外からアクセスできるようにする。  
 各ノード上からServiceポートへ接続するためのグローバルなポートを開ける点でClusterIP Serviceと異なる。  
+L4レベルまでしか扱えない。  
 
 ## LoadBalancer Service
 
