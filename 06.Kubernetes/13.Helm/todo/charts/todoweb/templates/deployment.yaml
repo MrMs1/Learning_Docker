@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "todoweb.fullname" . }}
+  name: todoweb
   labels:
-    {{- include "todoweb.labels" . | nindent 4 }}
+    app: todoweb
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "todoweb.selectorLabels" . | nindent 6 }}
+      app: todoweb
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,44 +18,50 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "todoweb.selectorLabels" . | nindent 8 }}
+        app: todoweb
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       serviceAccountName: {{ include "todoweb.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+      - name: assets
+        emptyDir: {}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        - name: nginx
+          image: gihyodocker/nginx-nuxt:latest
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
-              protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
+            - containerPort: 80
           readinessProbe:
             httpGet:
               path: /
-              port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+              port: 80
+          env:
+          - name: WORKER_PROCESSES
+            value: "2"
+          - name: WORKER_CONNECTIONS
+            value: "1024"
+          - name: LOG_STDOUT
+            value: "true"
+          - name: BACKEND_HOST
+            value: "localhost:3000"
+          volumeMounts:
+          - mountPath: /var/www/_nuxt
+            name: assets
+        - name: web 
+          image: gihyodocker/todoweb:latest
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - cp
+                - -R
+                - /todoweb/.nuxt/dist
+                - /
+          ports:
+          - containerPort: 3000         
+          env:
+          - name: TODO_API_URL
+            value: http://todoapi
+          volumeMounts:
+          - mountPath: /dist
+            name: assets 

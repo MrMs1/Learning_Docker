@@ -1,17 +1,19 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mysql-master
+  name: mysql-slave
   labels:
-    app: mysql-master
+    app: mysql-slave
 spec:
-  serviceName: mysql-master
+  serviceName: mysql-slave
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      app: mysql-master
+      app: mysql-slave
+  updateStrategy:
+    type: OnDelete  
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -19,12 +21,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        app: mysql-master
+        app: mysql-slave
     spec:
-      serviceAccountName: {{ include "mysql-master.serviceAccountName" . }}
-      terminationGracePeriodSeconds: 60
+      serviceAccountName: {{ include "mysql-slave.serviceAccountName" . }}
       containers:
-        - name: mysql-master
+        - name: mysql-slave
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
@@ -32,6 +33,8 @@ spec:
           ports:
             - containerPort: 3306
           env:
+          - name: MYSQL_MASTER_HOST
+            value: "mysql-master"
           - name: MYSQL_ROOT_PASSWORD
             value: "gihyo"
           - name: MYSQL_DATABASE
@@ -40,8 +43,10 @@ spec:
             value: "gihyo" 
           - name: MYSQL_PASSWORD
             value: "gihyo"
-          - name: MYSQL_MASTER
-            value: "true"
+          - name: MYSQL_REPL_USER
+            value: "repl"
+          - name: MYSQL_REPL_PASSWORD
+            value: "gihyo"
           volumeMounts:
           - name: mysql-data 
             mountPath: /var/lib/mysql
@@ -53,4 +58,4 @@ spec:
       storageClassName: ssd 
       resources:
         requests:
-          storage: 4Gi
+          storage: 4Gi            

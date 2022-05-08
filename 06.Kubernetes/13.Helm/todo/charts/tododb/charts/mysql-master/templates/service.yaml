@@ -1,15 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "mysql-master.fullname" . }}
+  name: mysql-master
   labels:
-    {{- include "mysql-master.labels" . | nindent 4 }}
+    app: mysql-master 
 spec:
-  type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
-      protocol: TCP
-      name: http
+      name: mysql
+  clusterIP: None
   selector:
-    {{- include "mysql-master.selectorLabels" . | nindent 4 }}
+    app: mysql-master

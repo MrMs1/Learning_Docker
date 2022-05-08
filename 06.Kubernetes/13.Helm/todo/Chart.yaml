@@ -22,3 +22,14 @@ version: 0.1.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "1.16.0"
+
+dependencies:
+- name: tododb
+  version: "1.0.0"
+  repository: "./charts/tododb"
+- name: todoapp
+  version: "1.0.0"
+  repository: "./charts/todoapp"
+- name: todoweb
+  version: "1.0.0"
+  repository: "./charts/todoweb"
