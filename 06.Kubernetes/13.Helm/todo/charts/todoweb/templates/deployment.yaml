@@ -30,10 +30,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 80
-          readinessProbe:
-            httpGet:
-              path: /
-              port: 80
           env:
           - name: WORKER_PROCESSES
             value: "2"
